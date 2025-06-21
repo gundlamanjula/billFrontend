@@ -6,7 +6,10 @@ import { TbPassword } from "react-icons/tb";
 import {toast} from "react-hot-toast"
 import { RiLockPasswordLine } from "react-icons/ri";
 import {validatePassword} from "val-pass"
+import empServices from '../../Service/empServices';
+import {useNavigate} from "react-router-dom";
 const Register = () => {
+  let navigate=useNavigate()
   let [FormData,setFormData]=useState({
     name:"",
     userName:"",
@@ -32,6 +35,7 @@ const Register = () => {
   let handleSubmit=(e)=>{
     e.preventDefault()
     let {name,email,userName,password}=FormData
+  
     if(!name||!userName||!email||!password)
       {
           toast.error("all fields are mandatory")
@@ -47,8 +51,26 @@ const Register = () => {
             toast.error("password and confirm password did not match")
             return
           }
-    console.log(FormData)
-  }
+          console.log(FormData) 
+        }; 
+          // empServices.regiUser(FormData)   
+          
+          (async()=>{
+            let data=await empServices.regiUser(FormData)
+            try {
+              if(data.status==201)
+                {
+                  toast.success("Registered Successfully")
+                  navigate("/login")
+                }
+                else{
+                  toast.error("Registration failed")
+                }
+            } catch (error) {
+              toast.error("Registration failed")
+            }
+          })()
+  
   let handlePasswordCheck=(e)=>
     {
       let {value}=e.target
