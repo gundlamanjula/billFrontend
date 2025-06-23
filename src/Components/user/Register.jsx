@@ -8,9 +8,11 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import {validatePassword} from "val-pass"
 import empServices from '../../Service/empServices';
 import {useNavigate} from "react-router-dom";
+
+
 const Register = () => {
   let navigate=useNavigate()
-  let [FormData,setFormData]=useState({
+  let [formData,setFormData]=useState({
     name:"",
     userName:"",
     email:"",
@@ -34,11 +36,11 @@ const Register = () => {
   }
   let handleSubmit=(e)=>{
     e.preventDefault()
-    let {name,email,userName,password}=FormData
+    let {name,email,userName,password}=formData
   
     if(!name||!userName||!email||!password)
       {
-          toast.error("all fields are mandatory")
+          toast.error("All fields are mandatory")
           return
       }
       let {validateAll,getAllValidationErrorMessage}=validatePassword(password)
@@ -51,12 +53,12 @@ const Register = () => {
             toast.error("password and confirm password did not match")
             return
           }
-          console.log(FormData) 
-        }; 
+          // console.log(FormData) 
+      
           // empServices.regiUser(FormData)   
           
           (async()=>{
-            let data=await empServices.regiUser(FormData)
+            let data=await empServices.regiUser(formData)
             try {
               if(data.status==201)
                 {
@@ -70,12 +72,12 @@ const Register = () => {
               toast.error("Registration failed")
             }
           })()
-  
+        }; 
   let handlePasswordCheck=(e)=>
     {
       let {value}=e.target
-      FormData.password!=value?setMatched(false):setMatched(true)
-      value==""&&setMatched(false)
+      formData.password!=value?setMatched(false):setMatched(true)
+      value==""&&setMatched(true)
       
     }
   return (
