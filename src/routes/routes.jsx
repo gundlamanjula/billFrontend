@@ -2,6 +2,10 @@ import { createBrowserRouter } from "react-router-dom"
 import Register from "../Components/user/Register"
 import Login from "../Components/user/Login"
 import Main from "../Components/user/main/Main"
+import Navbar from "../Components/user/main/navbar/NavBar"
+import AddBills from "../Components/user/main/addBills/AddBills"
+import FilterBills from "../Components/user/main/filterBills/FilterBills"
+import About from "../Components/user/main/about/About"
 let routes=createBrowserRouter([
     {
         path:"/register",
@@ -13,7 +17,7 @@ let routes=createBrowserRouter([
     },
     {
         path:"/home",
-        element:<Main></Main>
+        element:<Navbar></Navbar>,
     }
 ])
 export default routes

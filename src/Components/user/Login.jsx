@@ -27,7 +27,7 @@ const Login = () => {
         toast.success("Logined Succesfully")
         navigate("/home")
       }
-console.log(formData)
+// console.log(formData)
     
 (async()=>{
   let data=await empServices.loginUser(formData)
