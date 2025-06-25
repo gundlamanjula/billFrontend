@@ -24,10 +24,6 @@ const Login = () => {
         toast.error("All Fields are mandatory")
         return
       }
-      else{
-        toast.success("Logined Succesfully")
-        navigate("/home")
-      }
 // console.log(formData)
     
 (async()=>{
@@ -42,7 +38,7 @@ const Login = () => {
         toast.error(`${data.response.data.message}`)
       }
   } catch (error) {
-    toast.error("Registration failed")
+    toast.error("Login failed")
   }
 })()
 }; 
